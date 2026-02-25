@@ -1,7 +1,7 @@
 /*
 Naam: Hidde Camstra
 Studentnummer: 1898363
-Opdracht in dit bestand: Functies, basis, Functies, palingdroom.
+Opdracht in dit bestand: Functies, basis, Functies, palingdroom, Vector, Vector sorteren.
 */
 
 #include <iostream> 
