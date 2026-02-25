@@ -106,6 +106,112 @@ bool my_is_palingdroom(string my_cool_word){
 }
 
 
+// Vector:
+
+vector<int> positive1(vector<int> numbers){
+    for(unsigned int i=0; i<numbers.size(); i++){
+        if(numbers[i] < 0){
+            numbers[i] *= -1;
+        }
+    }
+    return numbers;
+}
+
+void positive2(vector<int> & numbers){
+    for(unsigned int i=0; i<numbers.size(); i++){
+        if(numbers[i] < 0){
+            numbers[i] *= -1;
+        }
+    }
+}
+
+vector<int> positive3(const vector<int> & numbers){
+    vector<int> newNumbers = numbers;
+
+    for(unsigned int i=0; i<newNumbers.size(); i++){
+        if(newNumbers[i] < 0){
+            newNumbers[i] *= -1;
+        }
+    }
+    return newNumbers;
+}
+
+/*Schrijf een functie die van een gegeven vector controleert of de getallen zijn gesorteerd van laag naar hoog. 
+Bedenk zelf een goede naam voor de functie en wat de functie teruggeeft.*/
+
+bool check_if_sorted(vector<int> numbers){
+    for (size_t i = 0; i < numbers.size() - 1; i++)
+    {
+        // debug
+        //cout << "numbers[i]: " << numbers[i] << " numbers[i + 1]: " << numbers[i + 1] << "\n";
+        if(numbers[i] > numbers[i + 1]){
+            return false;
+        }
+    }
+    return true;
+}
+
+/* 
+
+Schrijf een programma dat de gebruiker vraagt om een reeks getallen in te voeren door steeds één getal te geven.
+
+Als de gebruiker een negatief getal geeft, dan is de reeks compleet.
+Stop de getallen in een vector.
+Het negatieve getal neem je niet mee in de vector.
+Het programma print vervolgens op het scherm
+
+of de reeks gesorteerd is,
+wat de gemiddelde waarde is,
+wat zijn minimum waarde is en
+hoeveel getallen de reeks bevat.
+Zorg ervoor dat in de main()-functie zo min mogelijk code staat. Maak gebruik van je code van de eerdere opdrachten.
+
+*/
+
+void my_program(){
+    vector<int> my_vector;
+    int my_int;
+    cout << "\nGive int pls: "; //  get input
+    cin >> my_int;
+    my_vector.push_back(my_int);
+
+    //cout << "print my int: " << my_int << "\n";
+
+    while (true)
+    {
+        if (my_int >= 0){ // got positive number
+            cout << "\nGive int pls: "; //  get new input
+            cin >> my_int;
+            if (my_int >= 0){
+                my_vector.push_back(my_int);
+            }
+        }
+        else{ // got negative number
+            float total = 0;
+            int smallest_number = my_vector[0];
+            for (size_t i = 0; i < my_vector.size(); i++)
+            {
+                total += my_vector[i];
+                //cout << "my total: " << total << "\n";
+                if (my_vector[i] < smallest_number){
+                    smallest_number = my_vector[i];
+                }
+            }
+            
+            // print results:
+            cout << "\n";
+            cout << "De vector is gesorteerd (1 = true, 0 = false): " << check_if_sorted(my_vector) << "\n";
+            cout << "Gemiddelde van vector: " << total / my_vector.size() << "\n";
+            cout << "Kleinste getal van vector: " << smallest_number << "\n";
+            cout << "Aantal waardes van vector: " << my_vector.size() << "\n";
+            cout << "\n";
+            return;
+        }
+    }
+}
+
+
+
 int main(){ 
     // Functies, basis:
     vector<int> n = {37,4,9,4,9,37,3,5,0,4,1};
@@ -129,4 +235,38 @@ int main(){
     cout << "my palin: " << my_is_palingdroom("lepel") << "\n";
     cout << "my palin: " << my_is_palingdroom("flesje") << "\n";
     cout << "my palin: " << my_is_palingdroom("bommelding") << "\n";
+
+    // Vector:
+    /*
+    
+    2.3A: Beschrijf in één zin wat de functie positive1() doet.
+
+    antwoord: vraagt om een vector van ints, loopt er volledig doorheen, checkt of elk getal niet negatief is en als het getal dat wel is dan maakt die hem positief.
+
+
+    2.3B: De functie positive2() heeft geen return-statement. Hoe geeft de functie zijn resultaat terug?
+    
+    antwoord: heeft geen return-waarde, maar past de oorspronkelijke vector aan.
+    
+    2.3C: De drie functies vervullen alle drie ongeveer dezelfde taak. Ze verschillen voornamelijk in hun functiedeclaratie. 
+    [^1] Noem van elke functie een voordeel van de functiedeclaratie. [^1] Ook wel functiehandtekening of prototype genoemd.
+
+    positive1(): De functie is een mix van snel en overzichtelijk. Sneller dan 3. Maar meer overzichtelijk dan 2. En je kunt vector retournen dus makkelijk gebruiken.
+
+    positive2(): De vector wordt rechtstreeks doorgegeven. Dit lijkt mij sneller
+
+    positive3(): De originele vector wordt niet gewijzigd, en een nieuwe vector wordt gegeven. Wat overzichtelijker is.
+
+
+    2.3D: Welke functie heeft in dit geval je voorkeur? Geef minimaal één argument.
+    antwoord: mijn voorkeur gaat uit naar de derde functie, omdat het aanmaken van een nieuwe vector maakt het overzichtelijker naar mijn mening.
+
+    */
+    //Opdracht 2.13 Gesorteerde vector:
+
+    cout << "Check if sorted: " << check_if_sorted({0,1,2,3,4}) << "\n"; // sorted
+    cout << "Check if sorted: " << check_if_sorted({37,4,9,4,9,37,3,5,0,4,1}) << "\n"; // no sort :(
+
+    //Opdracht 2.14 Vector Input:
+    my_program();
 }
